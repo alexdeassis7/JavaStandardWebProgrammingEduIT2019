@@ -1,0 +1,31 @@
+Cuando desarrollamos aplicaciones en java con base de datos debemos tener cuidado en que se cumplan un conjunto de características conocida como ACID (Atomicidad, Consistencia, Aislamiento, Durabilidad), en el caso de este post nos centraremos en la Atomicidad y Consistencia
+
+Atomicidad: es la propiedad que asegura que la operación se ha realizado o no, y por lo tanto ante un fallo del sistema no puede quedar a medias. Se dice que una operación es atómica cuando es imposible para otra parte de un sistema encontrar pasos intermedios. Si esta operación consiste en una serie de pasos, todos ellos ocurren o ninguno. Por ejemplo, en el caso de una transacción bancaria o se ejecuta tanto el depósito como la deducción o ninguna acción es realizada. [Wikipedia]
+Consistencia: Integridad. Es la propiedad que asegura que sólo se empieza aquello que se puede acabar. Por lo tanto se ejecutan aquellas operaciones que no van a romper las reglas y directrices de integridad de la base de datos. La propiedad de consistencia sostiene que cualquier transacción llevará a la base de datos desde un estado válido a otro también válido. “La Integridad de la Base de Datos nos permite asegurar que los datos son exactos y consistentes, es decir que estén siempre intactos, sean siempre los esperados y que de ninguna manera cambien ni se deformen. De esta manera podemos garantizar que la información que se presenta al usuario será siempre la misma.” [Wikipedia]
+
+Planteando una situación para este tutorial
+
+Si tenemos una serie de sentencias SQL INSERT por ejecutar y por un motivo XYZ 🙂 surge un error que no permite que se completen todas estas sentencias nos encontramos con el problema de que hasta el punto que se produjo el error, los INSERT se ejecutaron y se guardaron nuevos registros en la base de datos, entonces estaríamos violando los criterios de Atomicidad y de Consistencia porque no primeramente no se completo la transacción en su totalidad pero tenemos nuevos registros en la base de datos pero estos registros están incompletos.
+
+¿Como podemos solucionar este problema?
+
+Necesitamos
+
+Java
+IDE Netbeans 7.x o Eclipse
+Libreria MySQL JDBC Driver
+MySQL
+Nivel: Intermedio
+
+Tiempo. 15 minutos
+
+
+
+Le añadimos el conector JDBC al proyecto
+Tenemos una clase llamada Database.java que nos permite conectarse a la base de datos MySQL
+Tenemos dos clases Main, JNoRollback y JRollback, en la primera clase se implementara las instrucciones INSERT sin el uso de Commit y Rollback , en la segunda clase con el uso de estos 2 métodos, el fin es apreciar mejor que pasa cuando se produce un error al ejecutar estas transacciones.
+
+
+
+
+
